@@ -92,6 +92,26 @@
     { "name": "x64-windows-sycl-release-f16", "inherits": [ "sycl-base", "release", "sycl_f16" ] },
 
     { "name": "x64-windows-vulkan-debug", "inherits": [ "base", "vulkan", "debug" ] },
-    { "name": "x64-windows-vulkan-release", "inherits": [ "base", "vulkan", "release" ] }
+    { "name": "x64-windows-vulkan-release", "inherits": [ "base", "vulkan", "release" ] },
+    {
+        "name": "x64-linux-gcc-release",
+        "displayName": "Linux GCC Release",
+        "description": "Builds for 64-bit Linux using GCC with Release optimizations.",
+        "inherits": ["base", "release"],
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "gcc",
+            "CMAKE_CXX_COMPILER": "g++"
+        }
+    },
+    {
+        "name": "x64-linux-gcc-debug",
+        "displayName": "Linux GCC Debug",
+        "description": "Builds for 64-bit Linux using GCC with Debug flags.",
+        "inherits": ["base", "debug"],
+        "cacheVariables": {
+            "CMAKE_C_COMPILER": "gcc",
+            "CMAKE_CXX_COMPILER": "g++"
+        }
+    }
   ]
 }
