@@ -26,6 +26,11 @@
 #include <ctime>
 #include <functional>
 
+// wwl
+#include "wwl/page_cache_analyzer.h"
+#include <iostream>
+#include <vector>
+
 #if defined(_MSC_VER)
 #pragma warning(disable: 4244 4267) // possible loss of data
 #endif
@@ -9526,6 +9531,14 @@ struct llama_model * llama_model_load_from_file(
         const char * path_model,
         struct llama_model_params params) {
     std::vector<std::string> splits = {};
+    auto ranges = get_model_page_cache_ranges(path_model);
+    if (!ranges.empty()) {
+        std::cout << "\n[System] Page Cache Status (Ranges):" << std::endl;
+        for (const auto& range : ranges) {
+            std::cout << "         - Pages (" << range.start_page << ", " << range.end_page << "): "
+                    << (range.is_cached ? "cached" : "uncached") << std::endl;
+        }
+    }
     return llama_model_load_from_file_impl(path_model, splits, params);
 }
 
